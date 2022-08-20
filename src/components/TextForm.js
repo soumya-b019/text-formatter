@@ -75,19 +75,23 @@ export default function TextForm(props) {
             <div className="mb-3">
             <textarea className="form-control" value={text} placeholder="Enter text here" onChange={handleOnChange} style={{backgroundColor: props.mode === 'dark'?'#799cd2':'white', color: props.mode === 'dark'?'white':'#042743'}} id="myBox" rows="8"></textarea>
             </div>
-            <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
-            <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert to Lowercase</button>
-            <button className="btn btn-primary mx-1" onClick={handleWordStartUpClick}>Convert Word Start to Uppercase</button>
-            <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
-            <button className="btn btn-primary mx-1" onClick={handleCopy}>Copy Text</button>
-            <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear Text</button>
+            <button className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+            <button className="btn btn-primary mx-1 my-1" onClick={handleLoClick}>Convert to Lowercase</button>
+            <button className="btn btn-primary mx-1 my-1" onClick={handleWordStartUpClick}>Convert Word Start to Uppercase</button>
+            <button className="btn btn-primary mx-1 my-1" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+            <button className="btn btn-primary mx-1 my-1" onClick={handleCopy}>Copy Text</button>
+            <button className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
         </div>
         <div className="container my-3" style={{color: props.mode === 'dark'?'white':'#042743'}}>
             <h2>Your Text Summary</h2>
             {/* Here, text.split(" ") yeh hume array dega jisme words honge;
             and us array ki length will be our no. of words */}
+            {/* Here, .filter function me hume arrow function likhna hai, and it works like that ki jis bhi element k liye true return karega woh element rahega and if returned false toh woh element nhi rahega */}
+            {/* i.e. agar element ki length (0) hai toh woh array me nhi rahega otherwise agar length>0 toh woh array me rahega  */}
             {/* And our text.length will give us the total characters  */}
-            <p>{text.split(" ").length} words and {text.length} characters</p>
+            <p>{text.split(" ").filter((element)=>{
+                return element.length !== 0
+            }).length} words and {text.length} characters</p>
             {/* Here, in the below code we have taken the time in minutes that on an average 
             how many words can be read by the normal user in 1 minute which is 125
             which means to read one word we will require 1/125 = 0.008sec 
